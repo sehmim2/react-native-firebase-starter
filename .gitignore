@@ -15,4 +15,4 @@ web-report/
 
 
 # firebase config
-./src/api/FirebaseConfig.js
+./FirebaseConfig.js
