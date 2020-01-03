@@ -1,1 +1,1 @@
-add src/api/FirebaseConfig.js with firebase configs to get started
+FirebaseConfig.js with firebase configs to get started
