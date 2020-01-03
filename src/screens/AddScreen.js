@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native'
 
 import * as firebase from 'firebase';
@@ -7,6 +7,7 @@ import '@firebase/firestore';
 import Constants from 'expo-constants';
 
 const db = firebase.firestore()
+
 const AddScreen = (props) => {
 
     const dataPassedFromHomeNav = JSON.stringify(props.navigation.getParam('someData', 'NO-DATA'))
@@ -30,7 +31,7 @@ const AddScreen = (props) => {
                 style={{ marginBottom: 20, height: 40, borderColor: 'gray', borderWidth: 1 }}
                 onChangeText={text => setValue(text)}
             />
-            <Button title="add" onPress={() => addData({ user, value }, navigate, 'test')}></Button>
+            <Button title="Add Stuff" onPress={() => addData({ user, value }, navigate, 'test')}></Button>
         </View>
     )
 }
@@ -47,6 +48,7 @@ const TextBox = (props) => {
 
 
 const addData = (data, navigate, collectionName) => {
+
     // Call Firebase AddData API here
     db.collection(collectionName)
         .add(data)
@@ -55,7 +57,7 @@ const addData = (data, navigate, collectionName) => {
             navigate('Dashboard')
         })
         .catch(err => console.log(err))
-    //
+
 }
 const styles = StyleSheet.create({
     container: {

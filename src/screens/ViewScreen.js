@@ -6,6 +6,8 @@ const ViewScreen = (props) => {
 
     const { navigation } = props;
     const user = JSON.stringify(navigation.getParam('user', 'NO-Data'))
+    const value = JSON.stringify(navigation.getParam('value', 'NO-Data'))
+
 
     return (
         <View >
@@ -14,14 +16,24 @@ const ViewScreen = (props) => {
                 <Text>
                     {user}
                 </Text>
+                <Text>
+                    {value}
+                </Text>
             </View>
+            <Button
+                color="red"
+                onPress={() => deleteData(navigation.navigate)}
+                title="Delete Stuff"></Button>
         </View>
     )
 }
 
 export default ViewScreen
 
-
+const deleteData = (navigate) => {
+    alert("To be Implimented")
+    navigate('Dashboard')
+}
 const styles = StyleSheet.create({
     item: {
         margin: 2.5,

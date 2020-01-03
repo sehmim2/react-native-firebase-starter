@@ -15,8 +15,8 @@ const Dashboard = (props) => {
 
 
     const { navigate } = props.navigation;
-    const onSelect = useCallback(({ user, selected }) => {
-        navigate('ViewScreen', { user })
+    const onSelect = useCallback(({ user, value, selected }) => {
+        navigate('ViewScreen', { user, value })
     }, [])
 
     useEffect(() => {
