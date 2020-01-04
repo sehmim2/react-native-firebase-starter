@@ -7,20 +7,20 @@ import { logInWithEmail, logInWithFaceBook } from '../api/LogIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const { navigate } = props.navigation
 
-
-    const [user, setUser] = useState(() => {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user != null) {
-                console.log(user)
-            }
-        })
-    })
+    // const [user, setUser] = useState(() => {
+    //     firebase.auth().onAuthStateChanged(user => {
+    //         if (user != null) {
+    //             console.log(user)
+    //         }
+    //     })
+    // })
     return (
         <Container style={styles.container}>
             <Content style={{ paddingTop: 100 }}>
@@ -45,7 +45,7 @@ const LoginPage = () => {
                     <Button
                         full rounded info
                         style={{ marginTop: 20 }}
-                        onPress={() => { logInWithEmail(email, password) }}>
+                        onPress={() => { logInWithEmail(email, password, navigate) }}>
                         <Text style={{ color: 'white' }}>Log In</Text>
 
                     </Button>

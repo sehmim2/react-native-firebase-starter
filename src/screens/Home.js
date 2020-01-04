@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, AsyncStorage } from 'react-native'
 
 import * as firebase from 'firebase';
 
@@ -19,19 +19,26 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig)
 }
 
-
-
 const Home = (props) => {
 
+    React.useEffect(() => _bootstrapAsync(), [])
     const { navigate } = props.navigation;
 
     return (
         <View>
             <Text>Home</Text>
-            <Button title="Go To AddScreen" onPress={() => navigate("AddScreen", { someData: "Poop" })} ></Button>
-            <Button title="Go To Signup Page" onPress={() => navigate("SignUpPage", { someData: "Poop" })} ></Button>
-            <Button title="Go To LogIn Page" onPress={() => navigate("LogInPage", { someData: "Poop" })} ></Button>
-            <Button title="Go To Dashboard Page" onPress={() => navigate("Dashboard", { someData: "Poop" })} ></Button>
+            {
+                // firebase.auth().currentUser ?
+                //     <>
+                //         <Button title="Go To Dashboard Page" onPress={() => navigate("Dashboard", { currentUser: firebase.auth().currentUser })} ></Button>
+                //     </>
+                //     :
+                <>
+                    <Button title="Go To Signup Page" onPress={() => navigate("SignUpPage", { someData: "Poop" })} ></Button>
+                    <Button title="Go To LogIn Page" onPress={() => navigate("LogInPage", { someData: "Poop" })} ></Button>
+                </>
+
+            }
 
         </View>
     )

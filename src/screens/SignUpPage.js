@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
-import * as firebase from 'firebase';
 import { Container, Content, Form, Item, Label, Input, Button } from 'native-base';
 import { signUpWithEmail } from '../api/SignUp';
 import { logInWithEmail, logInWithFaceBook } from '../api/LogIn';
 
+import * as firebase from 'firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-
+    const { navigate } = props.navigation
 
     const [user, setUser] = useState(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -46,16 +46,8 @@ const SignUpPage = () => {
                     <Button
                         full rounded success
                         style={{ marginTop: 20 }}
-                        onPress={() => { signUpWithEmail(email, password) }}>
+                        onPress={() => { signUpWithEmail(email, password, navigate) }}>
                         <Text style={{ color: 'white' }}>Sign Up</Text>
-                    </Button>
-
-                    <Button
-                        full rounded info
-                        style={{ marginTop: 20 }}
-                        onPress={() => { logInWithEmail(email, password) }}>
-                        <Text style={{ color: 'white' }}>Log In</Text>
-
                     </Button>
 
                     <Button
@@ -67,6 +59,9 @@ const SignUpPage = () => {
                             color='white' />
                     </Button>
 
+                    <Text style={styles.logingButton} onPress={() => { navigate('LogInPage') }}>
+                        LogIn
+                    </Text>
                 </Form>
             </Content>
         </Container>
@@ -79,6 +74,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'center'
     },
+    logingButton: {
+        justifyContent: 'center',
+        textAlign: 'center',
+        fontSize: 15,
+        padding: 30,
+        color: 'blue'
+    }
 })
 
 export default SignUpPage

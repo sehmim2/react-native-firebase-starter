@@ -1,14 +1,19 @@
 import * as firebase from 'firebase';
 import * as Facebook from 'expo-facebook';
-
+import { AsyncStorage } from 'react-native';
 
 // Facebook Configs
 const FB_APP_ID = "2994303310597129"
 
-const logInWithEmail = (email, password) => {
+const logInWithEmail = (email, password, navigate) => {
     try {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
-            console.log(user)
+        firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+            // Storing a key value pair in local storage
+            AsyncStorage.setItem('userToken', firebase.auth().currentUser.uid)
+                .then(() => {
+                    navigate("App", { currentUser: firebase.auth().currentUser })
+                })
+                .catch((err) => alert(err))
         })
     }
     catch (error) {

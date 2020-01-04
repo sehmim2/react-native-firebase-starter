@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 import Constants from 'expo-constants';
+import { logOutCurrentUser } from '../api/LogOut';
 
 
 const Dashboard = (props) => {
@@ -36,6 +37,15 @@ const Dashboard = (props) => {
             <ActivityIndicator size="large" color="#0000ff" />
         )
     }
+    else if (!state.loading && (state.data === null)) {
+        return (
+            <View>
+                <Text>
+                    No Data
+                </Text>
+            </View>
+        )
+    }
     return (
 
         <View>
@@ -48,19 +58,22 @@ const Dashboard = (props) => {
                         selected={item.selected}
                         value={item.value}
                         onSelect={onSelect}
+                        key={item.user}
                     />}
                 keyExtractor={item => item.id}
             />
             <Button
                 onPress={() => navigate('AddScreen', { homeState: state })}
                 title="Add Stuff"></Button>
+            <Button
+                color="blue"
+                onPress={() => logOutCurrentUser(navigate)}
+                title="LogOut"></Button>
         </View>
     )
 }
 
 function Item({ user, value, onSelect, selected }) {
-    { console.log("--> PROPS::", { user, value, onSelect, selected }) }
-
     return (
         <TouchableOpacity
             onPress={() => onSelect({ user, value, selected })}
