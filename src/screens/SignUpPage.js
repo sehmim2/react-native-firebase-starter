@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
 import { Container, Content, Form, Item, Label, Input, Button } from 'native-base';
 import { signUpWithEmail } from '../api/SignUp';
-import { logInWithEmail, logInWithFaceBook } from '../api/LogIn';
+import { logInWithEmail, logInWithFaceBook, googleLogin } from '../api/LogIn';
 
 import * as firebase from 'firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';

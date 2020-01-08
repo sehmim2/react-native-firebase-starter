@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
 import * as firebase from 'firebase';
 import { Container, Content, Form, Item, Label, Input, Button } from 'native-base';
-import { logInWithEmail, logInWithFaceBook } from '../api/LogIn';
+import { logInWithEmail, logInWithFaceBook, googleLogin } from '../api/LogIn';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -59,6 +59,15 @@ const LoginPage = (props) => {
                             color='white' />
                     </Button>
 
+                    <Button
+                        full rounded primary
+                        style={{ marginTop: 20 }}
+                        onPress={() => googleLogin()}>
+                        <Icon
+                            name="google"
+                            color='white' />
+                    </Button>
+
                 </Form>
             </Content>
         </Container>
@@ -69,7 +78,8 @@ const styles = StyleSheet.create({
         padding: 20,
         flex: 1,
         backgroundColor: '#fff',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignContent: 'center'
     },
 })
 

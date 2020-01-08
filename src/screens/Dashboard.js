@@ -1,11 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { StyleSheet, ActivityIndicator, View, Text, FlatList, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, ActivityIndicator, View, Text, FlatList, Button, TouchableOpacity } from 'react-native'
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 import Constants from 'expo-constants';
 import { logOutCurrentUser } from '../api/LogOut';
+
+// Styles
+import { buttonContainer } from "../Styles/GeneralClasses";
 
 
 const Dashboard = (props) => {
@@ -62,13 +65,21 @@ const Dashboard = (props) => {
                     />}
                 keyExtractor={item => item.id}
             />
-            <Button
-                onPress={() => navigate('AddScreen', { homeState: state })}
-                title="Add Stuff"></Button>
-            <Button
-                color="blue"
+            <TouchableOpacity
+                style={[buttonContainer, { marginLeft: 70 }]}
+                onPress={() => navigate('AddScreen', { homeState: state })}>
+                <Text style={{ color: 'white' }}>Add Stuff</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[buttonContainer, { marginLeft: 70, backgroundColor: "#f794a2" }]}
                 onPress={() => logOutCurrentUser(navigate)}
-                title="LogOut"></Button>
+                title="LogOut">
+                <Text style={{ color: 'white' }}>LogOut</Text>
+            </TouchableOpacity>
+
+
+
+            <Text style={styles.logingButton} onPress={() => { navigate('ProfileScreen') }}>Profile Page</Text>
         </View>
     )
 }
